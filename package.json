@@ -1,0 +1,21 @@
+{
+  "name": "pi-session-manager-tui",
+  "version": "0.1.0",
+  "description": "TUI session manager for pi: fuzzy search, browse, view history, rename, fork, resume, and delete sessions.",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "pi-extension",
+    "session",
+    "tui"
+  ],
+  "author": "musichen",
+  "license": "MIT",
+  "pi": {
+    "extensions": ["./src/index.ts"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  }
+}

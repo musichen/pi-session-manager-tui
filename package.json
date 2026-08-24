@@ -1,5 +1,5 @@
 {
-  "name": "pi-session-manager-tui",
+  "name": "@webboxes/pi-session-manager-tui",
   "version": "0.1.0",
   "description": "TUI session manager for pi: fuzzy search, browse, view history, rename, fork, resume, and delete sessions.",
   "keywords": [
@@ -7,15 +7,37 @@
     "pi",
     "pi-extension",
     "session",
-    "tui"
+    "tui",
+    "session-manager"
   ],
   "author": "musichen",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/musichen/pi-session-manager-tui.git"
+  },
+  "homepage": "https://github.com/musichen/pi-session-manager-tui#readme",
+  "bugs": {
+    "url": "https://github.com/musichen/pi-session-manager-tui/issues"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
   "pi": {
     "extensions": ["./src/index.ts"]
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",
     "@earendil-works/pi-tui": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typescript": "^5.4.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
   }
 }

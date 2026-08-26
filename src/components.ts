@@ -161,14 +161,18 @@ export class SessionListView implements Component {
       shortenCwd(session.cwd),
     ].join(" · ");
 
-    const labelWidth = Math.max(10, Math.floor(width * 0.42));
-    const metaWidth = Math.max(16, width - labelWidth - 4);
+    // Reserve the two outer spaces before calculating columns. The renderer
+    // rejects any line wider than the terminal, and styled text can still have
+    // its visible width measured independently from its ANSI escape length.
+    const contentWidth = Math.max(1, width - 2);
+    const labelWidth = Math.max(10, Math.floor(contentWidth * 0.42));
+    const metaWidth = Math.max(1, contentWidth - labelWidth - 4);
 
     const labelText = truncateToWidth(label, labelWidth);
     const metaText = truncateToWidth(meta, metaWidth);
 
     const line = `${prefix} ${isSelected ? theme.bold(labelText) : labelText}  ${theme.fg("muted", metaText)}`;
-    const padded = padRight(line, width - 2);
+    const padded = padRight(truncateToWidth(line, contentWidth), contentWidth);
 
     return isSelected ? theme.bg("selectedBg", ` ${padded} `) : ` ${padded} `;
   }

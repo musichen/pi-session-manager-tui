@@ -48,8 +48,9 @@ function clamp(value: number, min: number, max: number): number {
 
 /** Pad a string to the given visible width with spaces (ANSI-safe). */
 function padRight(text: string, width: number): string {
-  const extra = width - visibleWidth(text);
-  return extra > 0 ? text + " ".repeat(extra) : text;
+  const safeText = truncateToWidth(text, Math.max(0, width));
+  const extra = width - visibleWidth(safeText);
+  return extra > 0 ? safeText + " ".repeat(extra) : safeText;
 }
 
 /** A horizontal line of box-drawing characters. */
@@ -226,9 +227,18 @@ export class SessionListView implements Component {
     );
     lines.push(rule(width, theme, "└", "┘"));
 
-    this.cachedLines = lines;
+    // Keep a final width guard at the component boundary. Individual rows
+    // already budget their columns, but styled wide glyphs and terminal
+    // implementations can disagree by a cell. The TUI renderer treats an
+    // over-wide line as fatal, so never return one from this component.
+    const safeLines = lines.map((line) => {
+      const safe = truncateToWidth(line, Math.max(0, width));
+      return padRight(safe, Math.max(0, width));
+    });
+
+    this.cachedLines = safeLines;
     this.cachedWidth = width;
-    return lines;
+    return safeLines;
   }
 
   invalidate(): void {

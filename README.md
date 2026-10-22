@@ -97,6 +97,15 @@ src/
 └── sessions.ts     # list/search/rename/fork/delete + transcript helpers
 ```
 
+## Development
+
+```bash
+npm install
+npm run typecheck
+```
+
+`npm run typecheck` runs `tsc --noEmit` over `src/` and is the check to run before opening a pull request. There is no test script yet. To try local changes in pi, use the Local dev install under [Install](#install) (`pi -e ./src/index.ts`).
+
 ## License
 
 MIT

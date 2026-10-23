@@ -76,6 +76,12 @@ Selecting a session opens the actions menu:
 | `PgUp` / `PgDn` | jump history |
 | `Home` / `End` | start / end of history |
 
+## Troubleshooting
+
+- **No sessions listed.** The manager reads `~/.pi/agent/sessions/` (see How it works). Start and close a pi session in a project first, then reopen `/pi-session-manager-tui`.
+- **A session is missing from search.** Fuzzy search matches the display name, working directory, and transcript text. Clear the search with `esc` to see the full list again.
+- **Rename or fork did not stick.** Rename appends a `session_info` entry and fork creates a new session file, so reopen the list to see the updated name or the new session.
+
 ## How it works
 
 - Lists sessions via `SessionManager.listAll()`, which reads
